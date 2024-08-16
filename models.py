@@ -1,6 +1,4 @@
-from app import db
-from sqlalchemy.orm import relationship
-from sqlalchemy import Column, Integer, String, ForeignKey, Float
+from backend import db
 
 class User(db.Model):
     __tablename__ = "users"
@@ -15,26 +13,27 @@ class User(db.Model):
     image_url = db.Column(db.String)
     bio = db.Column(db.String)
 
-    recipes = relationship("Recipe", back_populates="user")
+    recipes = db.relationship("Recipe", back_populates="user")
+
 
 class Recipe(db.Model):
     __tablename__ = "recipes"
 
-    id = Column(Integer, primary_key=True)
-    title = Column(String(100), nullable=False)
-    ingredients = Column(String(500), nullable=False)
-    instructions = Column(String(2000), nullable=False)
-    author_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    chefImage = Column(String(255), nullable=True)
-    chefName = Column(String(100), nullable=True)
-    image = Column(String(255), nullable=True)
-    url = Column(String(255), nullable=True)
-    moreInfoUrl = Column(String(255), nullable=True)
-    rating = Column(Float, nullable=True, default=0.0)
-    prepTime = Column(String(50), nullable=True)
-    servings = Column(Integer, nullable=True, default=1)
-    countryOfOrigin = Column(String(100), nullable=True)
-    dietType = Column(String(50), nullable=True)
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    ingredients = db.Column(db.String(500), nullable=False)
+    instructions = db.Column(db.String(2000), nullable=False)
+    author_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    chefImage = db.Column(db.String(255), nullable=True)
+    chefName = db.Column(db.String(100), nullable=True)
+    image = db.Column(db.String(255), nullable=True)
+    url = db.Column(db.String(255), nullable=True)
+    moreInfoUrl = db.Column(db.String(255), nullable=True)
+    rating = db.Column(db.Float, nullable=True, default=0.0)
+    prepTime = db.Column(db.String(50), nullable=True)
+    servings = db.Column(db.Integer, nullable=True, default=1)
+    countryOfOrigin = db.Column(db.String(100), nullable=True)
+    dietType = db.Column(db.String(50), nullable=True)
 
-    user = relationship("User", back_populates="recipes")
+    user = db.relationship("User", back_populates="recipes")
 
