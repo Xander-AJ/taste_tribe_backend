@@ -1,4 +1,4 @@
-from backend import db
+from . import db
 
 class User(db.Model):
     __tablename__ = "users"
@@ -14,7 +14,6 @@ class User(db.Model):
     bio = db.Column(db.String)
 
     recipes = db.relationship("Recipe", back_populates="user")
-
 
 class Recipe(db.Model):
     __tablename__ = "recipes"
@@ -36,4 +35,3 @@ class Recipe(db.Model):
     dietType = db.Column(db.String(50), nullable=True)
 
     user = db.relationship("User", back_populates="recipes")
-
